@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>银豹版本下载链接速查</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b81c22'/%3E%3Ctext x='16' y='23' font-size='17' font-family='Arial' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --brand:#b81c22;
+    --brand-soft:#fdf2f2;
+    --line:#e8e8ec;
+    --text:#33383f;
+    --muted:#9aa0a8;
+    --bg:#ffffff;
+    --sidebar-bg:#fafafb;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{
+    display:flex;
+    flex-direction:column;
+    font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    overflow:hidden;
+  }
+
+  /* ---------- 顶部标题栏 ---------- */
+  .topbar{
+    flex:0 0 auto;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:0 20px;
+    background:linear-gradient(90deg,#a8161c,#c9242b);
+    color:#fff;
+    box-shadow:0 1px 6px rgba(0,0,0,.18);
+    z-index:5;
+  }
+  .topbar .title{font-size:18px;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+  .topbar .right{display:flex;align-items:center;gap:14px;font-size:13px;}
+  .progress-box{width:min(280px,32vw);display:flex;flex-direction:column;gap:4px;}
+  .progress-track{height:8px;width:100%;overflow:hidden;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.35);border-radius:999px;}
+  .progress-fill{height:100%;width:0%;background:#fff;border-radius:inherit;transition:width .25s ease;}
+  .progress-label{font-size:12px;line-height:1.2;text-align:right;white-space:nowrap;}
+  .worker-config{display:flex;align-items:center;gap:5px;white-space:nowrap;}
+  .worker-config input{width:48px;padding:4px 5px;border:1px solid rgba(255,255,255,.55);border-radius:5px;background:rgba(255,255,255,.16);color:#fff;text-align:center;font:inherit;}
+  .worker-config button{padding:4px 7px;border:1px solid rgba(255,255,255,.55);border-radius:5px;background:transparent;color:#fff;cursor:pointer;font:inherit;}
+  .worker-config button:hover{background:rgba(255,255,255,.16);}
+  .progress-pill{
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;
+    padding:4px 14px;
+    min-width:90px;
+    text-align:center;
+    white-space:nowrap;
+  }
+  .ghost-btn{
+    background:transparent;
+    border:1px solid rgba(255,255,255,.55);
+    color:#fff;
+    border-radius:6px;
+    padding:5px 12px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .ghost-btn:hover{background:rgba(255,255,255,.16);}
+  .ghost-btn[disabled]{opacity:.55;cursor:not-allowed;}
+
+  /* ---------- 左右两栏 ---------- */
+  .layout{
+    flex:1 1 auto;
+    display:flex;
+    min-height:0; /* 让两栏各自内部滚动 */
+  }
+  .sidebar{
+    flex:0 0 280px;
+    width:280px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:var(--sidebar-bg);
+    border-right:1px solid var(--line);
+    padding:8px 0 30px;
+  }
+  .sidebar-top{
+    position:sticky;
+    top:0;
+    background:var(--sidebar-bg);
+    padding:8px 12px 6px;
+    border-bottom:1px solid var(--line);
+    z-index:2;
+  }
+  .sidebar-head{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.5px;
+    padding-bottom:6px;
+  }
+  .cat-toggle{
+    width:100%;
+    margin-top:2px;
+    font:inherit;
+    font-size:11.5px;
+    color:#6b7280;
+    background:#eef0f3;
+    border:none;
+    border-radius:5px;
+    padding:4px 8px;
+    cursor:pointer;
+  }
+  .cat-toggle:hover{background:#e2e5ea;color:#33383f;}
+  .search-box{padding:8px 10px 6px;background:var(--sidebar-bg);}
+  .search-box input{
+    width:100%;
+    box-sizing:border-box;
+    font:inherit;
+    font-size:12.5px;
+    padding:6px 9px;
+    color:#33383f;
+    background:#fff;
+    border:1px solid #dcdfe4;
+    border-radius:6px;
+    outline:none;
+  }
+  .search-box input:focus{border-color:var(--brand);box-shadow:0 0 0 2px rgba(184,28,34,.12);}
+  .content-tools{display:flex;gap:8px;margin-top:6px;align-items:center;justify-content:flex-end;}
+  .topbar-search{flex:1 1 auto;min-width:160px;max-width:560px;margin:0 18px;
+    box-sizing:border-box;font:inherit;font-size:13px;padding:7px 12px;color:#33383f;
+    background:#fff;border:1px solid transparent;border-radius:8px;outline:none;}
+  .topbar-search::placeholder{color:#9aa0a8;}
+  .topbar-search:focus{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.45);}
+  .v-group-head{display:flex;align-items:center;gap:6px;padding:8px 4px 6px;cursor:pointer;
+    font-weight:600;color:#33383f;border-bottom:1px solid #eef0f3;user-select:none;}
+  .v-group-head .tg{display:inline-block;width:14px;color:#9aa0a8;font-size:12px;}
+  .v-group-head.empty{color:#b6bac1;cursor:default;}
+  .v-group.collapsed .version-item{display:none;}
+  .v-src{color:#b6bac1;font-size:12px;margin-left:10px;}
+  .cat-list{list-style:none;margin:0;padding:0;}
+  .cat-item{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    padding:9px 14px;
+    font-size:13.5px;
+    line-height:1.35;
+    color:#3d434b;
+    cursor:pointer;
+    border-left:3px solid transparent;
+    word-break:break-all;
+  }
+  .cat-item:hover{background:#f1f2f4;}
+  .cat-item.active{background:var(--brand-soft);color:var(--brand);border-left-color:var(--brand);font-weight:700;}
+  .cat-sep{color:#b3b8bf;}
+  .cat-item.active .cat-sep{color:#e3a3a6;}
+  .cat-count{color:var(--muted);font-size:12px;white-space:nowrap;}
+  .cat-item.active .cat-count{color:#d1787c;}
+  .cat-item.error .cat-count{color:#dc2626;font-weight:600;}
+
+  .content{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+    min-height:0;
+  }
+  .content-head{
+    flex:0 0 auto;
+    padding:12px 20px 10px;
+    border-bottom:1px solid var(--line);
+    background:#fff;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .content-title{font-size:16px;font-weight:700;}
+  .content-meta{font-size:12.5px;color:var(--muted);}
+  .content-hint{font-size:12.5px;color:var(--muted);margin-left:auto;}
+
+  .version-list{
+    flex:1 1 auto;
+    overflow-y:auto;
+    padding:6px 20px 60px;
+  }
+  .version-item{padding:10px 2px;border-bottom:1px solid #f3f4f6;}
+  .version-item:last-child{border-bottom:none;}
+  .v-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .v-btn{
+    font:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--brand);
+    background:#fff;
+    border:1px solid #f0d2d3;
+    border-radius:6px;
+    padding:4px 12px;
+    cursor:pointer;
+    max-width:100%;
+    word-break:break-all;
+    text-align:left;
+  }
+  .v-btn:hover{background:var(--brand-soft);border-color:#e0a6a8;}
+  .v-btn:active{transform:translateY(1px);}
+  .v-btn.disabled{
+    color:#a5a9b0;
+    background:#f7f7f9;
+    border-color:#e9e9ec;
+    cursor:not-allowed;
+    font-weight:500;
+  }
+  .v-btn.disabled:hover{background:#f7f7f9;border-color:#e9e9ec;}
+  .v-time{font-size:12px;color:var(--muted);}
+  .v-open{
+    font-size:13px;
+    color:#b6bac1;
+    text-decoration:none;
+    padding:0 2px;
+    line-height:1;
+  }
+  .v-open:hover{color:var(--brand);}
+  .v-notes-toggle{
+    margin-left:auto;
+    background:none;
+    border:none;
+    color:#7b8189;
+    font-size:12.5px;
+    cursor:pointer;
+    padding:2px 4px;
+    white-space:nowrap;
+  }
+  .v-notes-toggle:hover{color:var(--brand);}
+  .v-notes{
+    display:none;
+    margin:8px 0 2px;
+    padding:8px 12px;
+    background:#fafafb;
+    border-left:3px solid var(--line);
+    border-radius:4px;
+    font-size:13px;
+    line-height:1.75;
+    color:#565c64;
+    word-break:break-word;
+  }
+  .v-notes.open{display:block;}
+  .v-notes .note{white-space:pre-wrap;}
+
+  /* ---------- 空态 / 错误态 ---------- */
+  .placeholder{
+    padding:40px 20px;
+    color:var(--muted);
+    font-size:13.5px;
+    line-height:2;
+  }
+  .placeholder.error{color:#b91c1c;}
+  .retry-btn{
+    font:inherit;
+    font-size:13.5px;
+    color:#fff;
+    background:var(--brand);
+    border:none;
+    border-radius:6px;
+    padding:7px 18px;
+    cursor:pointer;
+    margin-top:8px;
+  }
+  .retry-btn:hover{background:#a8161c;}
+  .retry-btn[disabled]{opacity:.6;cursor:not-allowed;}
+
+  /* ---------- Toast ---------- */
+  .toast{
+    position:fixed;
+    top:14px;
+    left:50%;
+    transform:translate(-50%,-18px);
+    background:#1f2329;
+    color:#fff;
+    font-size:13.5px;
+    padding:9px 22px;
+    border-radius:999px;
+    box-shadow:0 8px 26px rgba(0,0,0,.22);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease,transform .18s ease;
+    z-index:99;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  /* ---------- 窄屏：上下堆叠 ---------- */
+  @media (max-width:768px){
+    body{overflow:auto;}
+    .layout{flex-direction:column;min-height:0;}
+    .sidebar{
+      flex:0 0 auto;
+      width:100%;
+      max-height:38vh;
+      border-right:none;
+      border-bottom:1px solid var(--line);
+    }
+    .content{flex:1 1 auto;min-height:60vh;}
+    .content-hint{display:none;}
+    .progress-box{width:34vw;min-width:150px;}
+    #workers{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="title">银豹版本下载链接速查</div>
+  <input id="verSearch" class="topbar-search" type="search" autocomplete="off"
+         placeholder="全局搜索版本号 / 关键字（跨全部分类，支持拼音首字母、汉字、字母间空格）">
+  <div class="right">
+    <div class="progress-box" aria-label="抓取进度">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progress">准备中… <strong id="progressPercent">0%</strong></div>
+    </div>
+    <div class="worker-config" title="设置下一次抓取的并发线程数">
+      <label for="workerInput">线程</label>
+      <input id="workerInput" type="number" min="1" max="32" value="32" aria-label="抓取线程数">
+      <button id="workerApply" type="button">应用</button>
+    </div>
+    <div class="progress-pill" id="workers" title="后端抓取并发线程数">并发 96/128</div>
+    <button class="ghost-btn" id="refreshBtn" title="清空缓存并重新抓取全部分类">刷新</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-head" id="sidebarHead">软件分类（共 {{ total }} 个）</div>
+      <button class="cat-toggle" id="invalidToggle" type="button">显示无效链接分类</button>
+    </div>
+    <div class="search-box">
+      <input id="searchInput" type="search" autocomplete="off"
+             placeholder="搜索：关键字 / 拼音首字母（如 bsyxt）">
+    </div>
+    <ul class="cat-list" id="catList"></ul>
+  </aside>
+
+  <section class="content">
+    <div class="content-head">
+      <div class="content-title" id="contentTitle">加载中…</div>
+      <div class="content-meta" id="contentMeta"></div>
+      <div class="content-tools">
+        <button id="invalidBtn" class="cat-toggle" type="button">显示无效链接</button>
+      </div>
+      <div class="content-hint">点击版本号即复制完整下载链接</div>
+    </div>
+    <div class="version-list" id="versionList">
+      <div class="placeholder" id="placeholder">正在从银豹官网抓取版本数据，请稍候…</div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast">复制成功</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var TOTAL = {{ total }};
+  var INVALID_SUMMARY = "无下载链接";
+  var SUMMARY_ICON = "⬇";
+
+  var state = {
+    order: [],    // 分类顺序（无下载链接 → 72 个官方分类）
+    data: {},     // 分类名 -> {name, status, versions, error}
+    visible: [],  // 当前显示的分类名
+    selected: null,
+    showInvalid: false,   // 「无下载链接」汇总分类默认隐藏
+    keyword: "",
+    verKeyword: "",       // 顶部全局搜索关键字
+    searchKw: "",         // 上次全局搜索渲染的关键字（判断是否新搜索）
+    lastGroups: [],       // 当前右栏已渲染的分组（供「显示无效链接」按钮判断）
+    validExpanded: true,  // 有效链接组默认展开
+    invalidExpanded: false,// 无效链接组默认折叠
+    renderedChecked: false,
+    loading: false,
+    loadedOnce: false,    // 抓取完成后的首屏是否已加载（检测仍在后台进行）
+    aliveRefreshed: false,// 检测完成后是否已刷新过全部 alive
+    aliveRefreshAt: 0,    // 上次全量 alive 刷新的时间戳（节流）
+    detectRefreshAt: 0,   // 上次检测中刷新当前分类的时间戳（节流）
+    kicked: false,
+    configLoaded: false
+  };
+
+  var el = {
+    progress: document.getElementById("progress"),
+    workers: document.getElementById("workers"),
+    workerInput: document.getElementById("workerInput"),
+    workerApply: document.getElementById("workerApply"),
+    progressFill: document.getElementById("progressFill"),
+    progressPercent: document.getElementById("progressPercent"),
+    catList: document.getElementById("catList"),
+    sidebarHead: document.getElementById("sidebarHead"),
+    invalidToggle: document.getElementById("invalidToggle"),
+    search: document.getElementById("searchInput"),
+    title: document.getElementById("contentTitle"),
+    meta: document.getElementById("contentMeta"),
+    list: document.getElementById("versionList"),
+    toast: document.getElementById("toast"),
+    refresh: document.getElementById("refreshBtn"),
+    verSearch: document.getElementById("verSearch"),
+    invalidBtn: document.getElementById("invalidBtn")
+  };
+
+  /* ---------------------------- 搜索匹配 ---------------------------- */
+
+  function normalize(text) {
+    return (text || "").toLowerCase().replace(/[^0-9a-z一-龥]/g, "");
+  }
+
+  // 模糊搜索：原文子串、拼音首字母子串或全拼子串（initials / fullpy 由后端给出）
+  function matchCategory(keyword, entry) {
+    var key = normalize(keyword);
+    if (!key) { return true; }
+    return normalize(entry.name).indexOf(key) >= 0
+        || normalize(entry.initials || "").indexOf(key) >= 0
+        || normalize(entry.fullpy || "").indexOf(key) >= 0;
+  }
+
+  // 右栏版本搜索匹配：规则 A（子串）/ 规则 D（拼音首字母），任一命中即匹配。
+  // 后端已为每个版本预计算 hay（归一化文本）与 haypy（拼音首字母形式），此处只做子串。
+  function matchVersion(keyword, v) {
+    var key = normalize(keyword);
+    if (!key) { return true; }
+    return (v.hay || "").indexOf(key) >= 0 || (v.haypy || "").indexOf(key) >= 0;
+  }
+
+  function entryCount(entry) {
+    if (entry.versions && entry.versions.length) { return entry.versions.length; }
+    return entry.total || 0;
+  }
+
+  /* ------------------------------ Toast ------------------------------ */
+
+  var toastTimer = null;
+
+  function showToast(text) {
+    el.toast.textContent = text || "复制成功";
+    el.toast.classList.add("show");
+    if (toastTimer) { clearTimeout(toastTimer); }
+    toastTimer = setTimeout(function () { el.toast.classList.remove("show"); }, 2000);
+  }
+
+  /* ---------------------------- 复制到剪贴板 ---------------------------- */
+
+  async function copyUrl(url, evt) {
+    if (evt) evt.preventDefault();
+    if (!url) return;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch (e) {
+      var ta = document.createElement("textarea");
+      ta.value = url;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); }
+      catch (e2) { prompt("请手动复制链接：", url); }
+      document.body.removeChild(ta);
+    }
+    showToast("复制成功");
+  }
+
+  /* ------------------------------ 渲染 ------------------------------ */
+
+  function placeholder(text, isError) {
+    el.list.textContent = "";
+    var box = document.createElement("div");
+    box.className = "placeholder" + (isError ? " error" : "");
+    box.textContent = text;
+    el.list.appendChild(box);
+    return box;
+  }
+
+  function renderSidebar() {
+    var frag = document.createDocumentFragment();
+    state.visible = [];
+    state.order.forEach(function (name) {
+      var entry = state.data[name] || {};
+      if (entry.virtual && name === INVALID_SUMMARY && !state.showInvalid && !state.keyword) {
+        return;                       // 「无效链接」分类默认隐藏（搜索时例外）
+      }
+      if (state.keyword && !matchCategory(state.keyword, entry)) {
+        return;                       // 搜索过滤
+      }
+      state.visible.push(name);
+      var failed = entry.status === "error";
+      var li = document.createElement("li");
+      li.className = "cat-item"
+        + (name === state.selected ? " active" : "")
+        + (failed ? " error" : "");
+      li.dataset.name = name;
+
+      var nameSpan = document.createElement("span");
+      nameSpan.className = "cat-name";
+      nameSpan.textContent = (entry.virtual ? SUMMARY_ICON + " " : "") + name;
+
+      var sep = document.createElement("span");
+      sep.className = "cat-sep";
+      sep.textContent = "·";
+
+      var countSpan = document.createElement("span");
+      countSpan.className = "cat-count";
+      countSpan.textContent = failed ? "加载失败" : String(entryCount(entry));
+
+      li.appendChild(nameSpan);
+      li.appendChild(sep);
+      li.appendChild(countSpan);
+      frag.appendChild(li);
+    });
+    el.catList.textContent = "";
+    el.catList.appendChild(frag);
+
+    if (state.keyword) {
+      el.sidebarHead.textContent = "匹配 " + state.visible.length + " / " + TOTAL + " 个分类";
+    } else {
+      var okCount = state.order.filter(function (n) {
+        var e = state.data[n];
+        return e && !e.virtual && e.status === "ok";
+      }).length;
+      el.sidebarHead.textContent = "软件分类（共 " + TOTAL + " 个 · 成功 " + okCount + "）";
+    }
+
+    if (!state.visible.length) {
+      var empty = document.createElement("li");
+      empty.className = "cat-item";
+      empty.style.color = "#9aa0a8";
+      empty.textContent = "没有匹配的分类，试试拼音首字母（如 bsyxt）";
+      el.catList.appendChild(empty);
+    }
+  }
+
+  function buildVersionItem(v) {
+    var item = document.createElement("div");
+    item.className = "version-item";
+    var row = document.createElement("div");
+    row.className = "v-row";
+    var label = "· 版本 " + (v.version || "");
+
+    if (v.url) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "v-btn";
+      btn.textContent = label;
+      btn.title = "点击复制下载链接";
+      btn.addEventListener("click", function (evt) { copyUrl(v.url, evt); });
+      row.appendChild(btn);
+    } else {
+      var dead = document.createElement("span");
+      dead.className = "v-btn disabled";
+      dead.textContent = label;
+      dead.title = "该版本无下载链接";
+      row.appendChild(dead);
+    }
+
+    var published = (v.published || "").trim();
+    if (published) {
+      var time = document.createElement("span");
+      time.className = "v-time";
+      time.textContent = published;
+      row.appendChild(time);
+    }
+
+    if (v.url) {
+      var open = document.createElement("a");
+      open.className = "v-open";
+      open.href = v.url;
+      open.target = "_blank";
+      open.rel = "noopener";
+      open.title = "在新标签打开";
+      open.textContent = "↗";
+      row.appendChild(open);
+    }
+
+    if (v.category) {          // 汇总分类里标出来源分类
+      var src = document.createElement("span");
+      src.className = "v-src";
+      src.textContent = "← " + v.category;
+      src.title = "来源分类：" + v.category;
+      row.appendChild(src);
+    }
+
+    var notes = v.notes || [];
+    item.appendChild(row);
+    if (!notes.length) { return item; }
+
+    var panel = document.createElement("div");
+    panel.className = "v-notes";
+    notes.forEach(function (n) {
+      var line = document.createElement("div");
+      line.className = "note";
+      line.textContent = n;
+      panel.appendChild(line);
+    });
+
+    var toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "v-notes-toggle";
+    toggle.textContent = "更新说明 ▸";
+    toggle.addEventListener("click", function () {
+      var opened = panel.classList.toggle("open");
+      toggle.textContent = opened ? "更新说明 ▾" : "更新说明 ▸";
+    });
+    row.appendChild(toggle);
+    item.appendChild(panel);
+    return item;
+  }
+
+  function renderRight(name) {
+    if (state.verKeyword) {                 // 有全局搜索词时显示全局结果
+      renderSearch(state.verKeyword);
+      return;
+    }
+    var entry = state.data[name];
+    el.title.textContent = name;
+    if (!entry) {
+      el.meta.textContent = "";
+      placeholder("暂无该分类数据。");
+      return;
+    }
+    if (entry.status === "error") {
+      el.meta.textContent = "";
+      var box = placeholder("加载失败", true);
+      if (entry.error) {
+        box.appendChild(document.createElement("br"));
+        box.appendChild(document.createTextNode("原因：" + entry.error));
+      }
+      var retry = document.createElement("button");
+      retry.type = "button";
+      retry.className = "retry-btn";
+      retry.textContent = "重新加载";
+      retry.addEventListener("click", function () { reloadCategory(name, retry); });
+      box.appendChild(document.createElement("br"));
+      box.appendChild(retry);
+      return;
+    }
+
+    // 汇总分类：首次点击时按需汇总明细（结果缓存，不重复请求）
+    if (entry.virtual && !(entry.versions || []).length) {
+      el.meta.textContent = "共 " + (entry.total || 0) + " 个版本";
+      placeholder("正在汇总全部分类的「" + name + "」，请稍候…");
+      loadSummary(name, entry.kind);
+      return;
+    }
+
+    var versions = entry.versions || [];
+    if (entry.virtual) {
+      el.meta.textContent = "共 " + versions.length + " 个版本 · 来自 " + TOTAL + " 个分类";
+      renderFlat(versions);
+      return;
+    }
+
+    // 真实分类：检测完成后按「有效 / 无效」两个分组渲染；检测中显示进度
+    if (!entry.checked) {
+      var done = 0;
+      versions.forEach(function (v) { if (!v.url || v.alive != null) { done++; } });
+      el.meta.textContent = "共 " + versions.length + " 个版本（检测中 " + done + "/" + versions.length + "）";
+      placeholder("链接有效性检测中，请稍候…");
+      return;
+    }
+    renderGroups(versions, entry);
+  }
+
+  function renderFlat(versions) {
+    if (!versions.length) { placeholder("该分类暂无版本数据。"); return; }
+    el.list.textContent = "";
+    var frag = document.createDocumentFragment();
+    versions.forEach(function (v) { frag.appendChild(buildVersionItem(v)); });
+    el.list.appendChild(frag);
+    el.list.scrollTop = 0;
+  }
+
+  // 依据关键字把版本划分成「有效 / 无效」两组（kw 为空则不过滤）
+  function computeGroups(versions, kw) {
+    var valid = [], invalid = [];
+    versions.forEach(function (v, idx) {
+      if (kw && !matchVersion(kw, v)) { return; }
+      if (v.url && v.alive === true) { valid.push(idx); }
+      else { invalid.push(idx); }   // url+无效 或 无 url（历史版本）
+    });
+    if (kw) {
+      if (valid.length) { state.validExpanded = true; }
+      if (invalid.length) { state.invalidExpanded = true; }
+    }
+    return [
+      { key: "valid", title: "有效链接", expanded: state.validExpanded, items: valid },
+      { key: "invalid", title: "无效链接", expanded: state.invalidExpanded, items: invalid }
+    ];
+  }
+
+  // 把已算好的分组画进列表；rerender 为点击分组标题后重新渲染的回调
+  function paintGroups(versions, groups, rerender) {
+    state.lastGroups = groups;
+    el.list.textContent = "";
+    var frag = document.createDocumentFragment();
+    groups.forEach(function (g) {
+      var head = document.createElement("div");
+      head.className = "v-group-head" + (g.items.length ? "" : " empty");
+      var tg = document.createElement("span");
+      tg.className = "tg";
+      tg.textContent = g.items.length ? (g.expanded ? "▼" : "▶") : "";
+      head.appendChild(tg);
+      head.appendChild(document.createTextNode(g.title + " (" + g.items.length + ")"));
+      frag.appendChild(head);
+      var wrap = document.createElement("div");
+      wrap.className = "v-group" + (g.expanded ? "" : " collapsed");
+      if (g.items.length) {
+        g.items.forEach(function (idx) {
+          wrap.appendChild(buildVersionItem(versions[idx]));
+        });
+        head.addEventListener("click", function () {
+          g.expanded = !g.expanded;
+          if (g.key === "valid") { state.validExpanded = g.expanded; }
+          else { state.invalidExpanded = g.expanded; }
+          rerender();
+        });
+      }
+      frag.appendChild(wrap);
+    });
+    el.list.appendChild(frag);
+    el.list.scrollTop = 0;
+  }
+
+  function renderGroups(versions, entry) {
+    var groups = computeGroups(versions, "");
+    el.meta.textContent = "共 " + versions.length + " 个版本 · 有效 " +
+      groups[0].items.length + " · 无效 " + groups[1].items.length;
+    paintGroups(versions, groups, function () { renderGroups(versions, entry); });
+  }
+
+  // 全局搜索：跨全部官方分类匹配版本（附来源分类），结果按「有效 / 无效」分组展示
+  function searchMatches(kw) {
+    var matched = [];
+    state.order.forEach(function (n) {
+      var e = state.data[n];
+      if (!e || e.virtual || e.status !== "ok") { return; }
+      (e.versions || []).forEach(function (v) {
+        if (matchVersion(kw, v)) {
+          var vv = Object.assign({}, v);
+          vv.category = n;
+          matched.push(vv);
+        }
+      });
+    });
+    return matched;
+  }
+
+  function renderSearch(kw) {
+    var isNew = state.searchKw !== kw;      // 新搜索词才重置分组展开状态
+    state.searchKw = kw;
+    var matched = searchMatches(kw);
+    el.title.textContent = "全局搜索「" + kw + "」";
+    if (isNew) { state.validExpanded = true; state.invalidExpanded = false; }
+    if (!matched.length) {
+      state.lastGroups = [];
+      el.meta.textContent = "全局未找到匹配版本";
+      el.list.textContent = "";
+      var p = document.createElement("div");
+      p.className = "placeholder";
+      p.textContent = "未找到匹配版本";
+      el.list.appendChild(p);
+      el.invalidBtn.textContent = "显示无效链接";
+      return;
+    }
+    var saved = [state.validExpanded, state.invalidExpanded];
+    var groups = computeGroups(matched, kw);
+    if (!isNew) {                           // 保留用户手动展开/折叠的分组状态
+      state.validExpanded = saved[0];
+      state.invalidExpanded = saved[1];
+      groups[0].expanded = saved[0];
+      groups[1].expanded = saved[1];
+    }
+    el.meta.textContent = "全局命中 " + matched.length + " 个版本 · 有效 " +
+      groups[0].items.length + " · 无效 " + groups[1].items.length;
+    el.invalidBtn.textContent = state.invalidExpanded ? "隐藏无效链接" : "显示无效链接";
+    paintGroups(matched, groups, function () { renderSearch(kw); });
+  }
+
+  async function loadSummary(name, kind) {
+    try {
+      var data = await fetchJson("/api/summary?kind=" + encodeURIComponent(kind), { cache: "no-store" }, 3);
+      state.data[name] = data;
+      renderSidebar();
+      if (state.selected === name) { renderRight(name); }
+      showToast("已汇总 " + ((data.versions || []).length) + " 个版本");
+    } catch (err) {
+      placeholder("汇总失败，请点击分类重试。", true);
+    }
+  }
+
+  function selectCategory(name) {
+    state.selected = name;
+    state.verKeyword = "";                 // 切换分类清空顶部全局搜索
+    state.searchKw = "";
+    state.validExpanded = true;            // 有效组默认展开
+    state.invalidExpanded = false;         // 无效组默认折叠
+    state.renderedChecked = false;
+    el.verSearch.value = "";
+    el.invalidBtn.textContent = "显示无效链接";
+    renderSidebar();
+    renderRight(name);
+  }
+
+  function toggleInvalidGroup() {
+    var groups = state.lastGroups || [];
+    if (!groups.length || !groups[1] || !groups[1].items.length) {
+      showToast("没有无效链接"); return;
+    }
+    state.invalidExpanded = !state.invalidExpanded;
+    el.invalidBtn.textContent = state.invalidExpanded ? "隐藏无效链接" : "显示无效链接";
+    if (state.verKeyword) {
+      renderSearch(state.verKeyword);
+    } else {
+      var entry = state.data[state.selected];
+      if (entry) { renderGroups(entry.versions || [], entry); }
+    }
+  }
+
+  function onVerSearch() {
+    var kw = el.verSearch.value.trim();
+    state.verKeyword = kw;
+    if (!kw) { state.searchKw = ""; }
+    renderRight(state.selected);
+  }
+
+  /* ---------------------------- 单分类重试 ---------------------------- */
+
+  async function reloadCategory(name, btn) {
+    if (btn) { btn.disabled = true; btn.textContent = "加载中…"; }
+    try {
+      var entry;
+      try {
+        entry = await fetchJson("/api/category/" + encodeURIComponent(name), { cache: "no-store" }, 2);
+      } catch (e1) {
+        // 分类名里带 / 等特殊字符时，退回查询参数形式
+        entry = await fetchJson("/api/category?name=" + encodeURIComponent(name), { cache: "no-store" }, 2);
+      }
+      state.data[name] = entry;
+      renderSidebar();
+      if (state.selected === name) { renderRight(name); }
+      if (entry.status === "ok") {
+        showToast("已重新加载 " + ((entry.versions || []).length) + " 个版本");
+      } else {
+        showToast("重新加载失败");
+      }
+    } catch (err) {
+      if (btn) { btn.disabled = false; btn.textContent = "重新加载"; }
+      showToast("重新加载失败：" + (err && err.message ? err.message : err));
+    }
+  }
+
+  /* ----------------------------- 数据加载 ----------------------------- */
+
+  function setProgress(p) {
+    var total = p.total || TOTAL;
+    var fetched = Math.min(total, Number(p.done) || 0);
+    var detectTotal = Number(p.detect_total) || 0;
+    var detectDone = Math.min(detectTotal, Number(p.detect_done) || 0);
+    var percent = p.running ? (fetched / total) * 80 : 80;
+    if (!p.running && fetched === 0 && detectTotal === 0) { percent = 0; }
+    if (!p.running && detectTotal > 0) {
+      percent = 80 + (detectDone / detectTotal) * 20;
+    }
+    if (!p.running && !p.detecting && fetched >= total) { percent = 100; }
+    percent = Math.max(0, Math.min(100, percent));
+    el.progressFill.style.width = percent.toFixed(1) + "%";
+    el.progressPercent.textContent = Math.round(percent) + "%";
+    if (p.running) {
+      el.progress.textContent = "正在抓取 " + fetched + "/" + total + " ";
+      el.progress.appendChild(el.progressPercent);
+      el.refresh.disabled = true;
+    } else {
+      var text = "已加载 " + fetched + "/" + total + " · 成功 " + (p.ok || 0) + " · 失败 " + (p.error || 0);
+      if (p.detecting) { text += " · 检测 " + detectDone + "/" + detectTotal; }
+      el.progress.textContent = text + " ";
+      el.progress.appendChild(el.progressPercent);
+      el.refresh.disabled = false;
+    }
+    // 检测阶段：当前分类检测完成时整体重渲染其两个分组
+    if (!p.running && state.selected && !state.data[state.selected].virtual) {
+      var live = state.data[state.selected];
+      if (live && live.checked && !state.renderedChecked) {
+        state.renderedChecked = true;
+        renderRight(state.selected);
+      }
+    }
+  }
+
+  /* 带重试的 JSON 请求：/api/all 体积较大，偶发的连接中断可自动重试兜底 */
+  async function fetchJson(url, options, attempts) {
+    var tries = attempts || 3;
+    var lastErr = null;
+    for (var i = 0; i < tries; i++) {
+      try {
+        var res = await fetch(url, options);
+        if (!res.ok) { throw new Error("HTTP " + res.status); }
+        return await res.json();
+      } catch (err) {
+        lastErr = err;
+        await new Promise(function (resolve) { setTimeout(resolve, 300 * (i + 1)); });
+      }
+    }
+    throw lastErr;
+  }
+
+  async function loadAll() {
+    if (state.loading) return;
+    state.loading = true;
+    state.aliveRefreshed = false;
+    state.aliveRefreshAt = 0;
+    try {
+      var data = await fetchJson("/api/all", { cache: "no-store" }, 4);
+      state.order = [];
+      state.data = {};
+      // 左栏顶部汇总分类（只保留「无下载链接」；明细按需加载）
+      var templates = data.virtual || [
+        { name: INVALID_SUMMARY, kind: "invalid", description: "全部分类中没有下载链接的历史版本", initials: "wxlj", total: 0 }
+      ];
+      templates.forEach(function (tpl) {
+        var entry = {
+          name: tpl.name, status: "ok", virtual: true, kind: tpl.kind,
+          description: tpl.description, initials: tpl.initials, fullpy: tpl.fullpy || "",
+          versions: [], total: tpl.total || 0, error: ""
+        };
+        state.order.push(entry.name);
+        state.data[entry.name] = entry;
+      });
+      (data.categories || []).forEach(function (c) {
+        state.order.push(c.name);
+        state.data[c.name] = c;
+      });
+      renderSidebar();
+      if (data.progress) { setProgress(data.progress); }
+      if (state.visible.length) { selectCategory(state.visible[0]); }
+      else { placeholder("未获取到任何分类数据。"); }
+    } catch (err) {
+      el.title.textContent = "加载失败";
+      placeholder("加载数据失败：" + (err && err.message ? err.message : err), true);
+    } finally {
+      state.loading = false;
+    }
+  }
+
+  async function refreshCurrent() {
+    // 检测完成后静默刷新当前分类（拿到 checked/alive），不弹 Toast
+    var name = state.selected;
+    if (!name || (state.data[name] && state.data[name].virtual)) { return; }
+    try {
+      var entry = await fetchJson("/api/category/" + encodeURIComponent(name), { cache: "no-store" }, 2);
+      state.data[name] = entry;
+      state.renderedChecked = true;
+      if (state.selected === name) { renderRight(name); }
+    } catch (e) { /* 忽略 */ }
+  }
+
+  async function refreshAllAlive() {
+    // 检测完成后静默刷新全部分类的版本（拿到 checked/alive），保留当前选择与搜索；失败会节流重试
+    var now = Date.now();
+    if (now - (state.aliveRefreshAt || 0) < 3000) { return false; }
+    state.aliveRefreshAt = now;
+    try {
+      var data = await fetchJson("/api/all", { cache: "no-store" }, 4);
+      (data.categories || []).forEach(function (c) {
+        var e = state.data[c.name];
+        if (e) { e.versions = c.versions; e.checked = c.checked; }
+      });
+      renderSidebar();
+      renderRight(state.selected);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function poll() {
+    try {
+      if (!state.configLoaded) {
+        try {
+          var cfg = await fetchJson("/api/config", { cache: "no-store" }, 2);
+          var workers = Number(cfg.workers) || 1;
+          var maxWorkers = Number(cfg.max_workers) || workers;
+          el.workers.textContent = "并发 " + workers + "/" + maxWorkers;
+          el.workerInput.value = workers;
+          state.configLoaded = true;
+        } catch (configErr) {
+          el.workers.textContent = "并发 32/32";
+        }
+      }
+      var res = await fetch("/api/progress", { cache: "no-store" });
+      var p = await res.json();
+      setProgress(p);
+      // 抓取阶段一结束就立刻加载首屏（此时链接检测仍在后台进行），
+      // 不再等检测跑完，避免界面长时间停在「正在抓取」而看似卡死。
+      if (!p.running && p.done >= p.total && !state.loadedOnce) {
+        state.loadedOnce = true;
+        await loadAll();
+      }
+      if (!p.running && p.done < p.total && !state.kicked) {
+        state.kicked = true;
+        try { await fetch("/api/refresh", { method: "POST" }); } catch (e) { /* 忽略 */ }
+      }
+      // 检测进行中：非全局搜索时定时刷新当前分类，让「检测中 x/N」实时更新
+      if (p.detecting && !state.verKeyword) {
+        var cur = state.data[state.selected];
+        if (cur && !cur.virtual && !cur.checked && (Date.now() - (state.detectRefreshAt || 0) > 1200)) {
+          state.detectRefreshAt = Date.now();
+          await refreshCurrent();
+        }
+      }
+      // 检测全部完成：刷新全部版本的 alive，使分组与搜索结果显示正确
+      if (!p.running && p.detect_total > 0 && p.detect_done >= p.detect_total && !state.aliveRefreshed) {
+        state.aliveRefreshed = await refreshAllAlive();
+      }
+      // 检测仍在进行时保持快速轮询，其余情况放慢，避免无谓请求
+      setTimeout(poll, (p.running || p.detecting) ? 500 : 1500);
+    } catch (err) {
+      el.progress.textContent = "后端未响应，重试中…";
+      setTimeout(poll, 1000);
+    }
+  }
+
+  /* ------------------------------ 事件 ------------------------------ */
+
+  el.search.addEventListener("input", function () {
+    state.keyword = el.search.value.trim();
+    renderSidebar();
+  });
+  el.search.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      el.search.value = "";
+      state.keyword = "";
+      renderSidebar();
+    }
+  });
+
+  el.invalidToggle.addEventListener("click", function () {
+    state.showInvalid = !state.showInvalid;
+    el.invalidToggle.textContent = state.showInvalid ? "隐藏无效链接分类" : "显示无效链接分类";
+    renderSidebar();
+  });
+
+  el.verSearch.addEventListener("input", onVerSearch);
+  el.verSearch.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      el.verSearch.value = "";
+      state.verKeyword = "";
+      state.searchKw = "";
+      renderRight(state.selected);
+    }
+  });
+  el.invalidBtn.addEventListener("click", toggleInvalidGroup);
+
+  el.catList.addEventListener("click", function (evt) {
+    var node = evt.target;
+    while (node && node !== el.catList && !node.classList.contains("cat-item")) {
+      node = node.parentNode;
+    }
+    if (!node || node === el.catList) { return; }
+    var name = node.dataset.name;
+    if (!name || !state.data[name]) { return; }
+    selectCategory(name);
+  });
+
+  el.workerApply.addEventListener("click", async function () {
+    var requested = Math.max(1, Math.min(32, Number(el.workerInput.value) || 32));
+    el.workerInput.value = requested;
+    el.workerApply.disabled = true;
+    try {
+      var res = await fetch("/api/config", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({workers: requested})
+      });
+      var data = await res.json();
+      if (!res.ok) { throw new Error(data.error || "配置失败"); }
+      el.workers.textContent = "并发 " + data.workers + "/" + data.max_workers;
+      showToast("已设置 " + data.workers + " 线程，将刷新抓取");
+      state.kicked = false;
+      state.loadedOnce = false;
+      await fetch("/api/refresh", {method: "POST"});
+      setTimeout(poll, 300);
+    } catch (err) {
+      showToast("线程配置失败：" + (err.message || err));
+    } finally {
+      el.workerApply.disabled = false;
+    }
+  });
+
+  el.refresh.addEventListener("click", async function () {
+    el.refresh.disabled = true;
+    state.kicked = false;
+    state.loading = false;
+    state.loadedOnce = false;
+    state.aliveRefreshed = false;
+    el.progress.textContent = "正在刷新…";
+    try { await fetch("/api/refresh", { method: "POST" }); } catch (e) { /* 忽略 */ }
+    setTimeout(poll, 300);
+  });
+
+  poll();
+})();
+</script>
+</body>
+</html>
